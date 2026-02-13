@@ -3,16 +3,16 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "auto-gitmsg"
+name = "gcm"
 version = "0.1.0"
-description = "自动生成 Git Commit Message 的命令行工具"
+description = "Git Commit Message 自动生成工具"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.8"
 authors = [
     {name = "Your Name", email = "your@email.com"}
 ]
-keywords = ["git", "commit", "message", "ai", "llm", "openai"]
+keywords = ["git", "commit", "message", "ai", "llm", "openai", "gcm"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
@@ -34,12 +34,12 @@ dependencies = [
 ]
 
 [project.scripts]
-gitmsg = "auto_gitmsg.cli:main"
+gcm = "gcm.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/auto-gitmsg"
-Repository = "https://github.com/yourusername/auto-gitmsg"
+Homepage = "https://github.com/yourusername/gcm"
+Repository = "https://github.com/yourusername/gcm"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["auto_gitmsg*"]
+include = ["gcm*"]

@@ -1,6 +1,6 @@
-# Auto Gitmsg
+# GCM
 
-基于 LLM 的 Git Commit Message 自动生成工具。
+Git Commit Message 自动生成工具。
 
 ## 功能
 
@@ -13,8 +13,7 @@
 ## 安装
 
 ```bash
-# 从源码安装
-pip install -e .
+make install
 ```
 
 ## 配置
@@ -38,33 +37,33 @@ OPENAI_MODEL="gpt-4o-mini"
 |------|----------------|--------------|
 | OpenAI | https://api.openai.com/v1 | gpt-4o, gpt-4o-mini |
 | 智谱 AI | https://open.bigmodel.cn/api/paas/v4 | glm-4-plus, glm-4-flash |
-| DeepSeek | https://api.deepseek.com/v1 | deepseek-chat |
+| DeepSeek | https://api.deepseek.com | deepseek-chat |
 | Ollama | http://localhost:11434/v1 | llama3, qwen2 |
 
 ## 使用
 
 ```bash
 # 生成精简 commit message
-gitmsg
+gcm
 
 # 生成详细 commit message
-gitmsg -v
+gcm -v
 
 # 指定模型（覆盖 .env）
-gitmsg -m gpt-4
+gcm -m gpt-4
 
 # 查看帮助
-gitmsg --help
+gcm --help
 ```
 
 ### 与 Git 集成
 
 ```bash
 # 直接使用生成的 message 提交
-git commit -m "$(gitmsg)"
+git commit -m "$(gcm)"
 
 # 或创建别名
-git config --global alias.cm '!git commit -m "$(gitmsg)"'
+git config --global alias.cm '!git commit -m "$(gcm)"'
 # 之后可以用 git cm
 ```
 

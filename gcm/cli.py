@@ -8,14 +8,14 @@ from typing import Optional
 
 from dotenv import load_dotenv
 
-from auto_gitmsg import __version__
-from auto_gitmsg.git_utils import (
+from gcm import __version__
+from gcm.git_utils import (
     is_git_repo,
     get_staged_changes,
     StagedChanges
 )
-from auto_gitmsg.prompts import build_user_prompt, get_system_prompt
-from auto_gitmsg.llm_client import LLMClient, LLMConfig
+from gcm.prompts import build_user_prompt, get_system_prompt
+from gcm.llm_client import LLMClient, LLMConfig
 
 
 def find_env_file() -> Optional[Path]:
@@ -66,7 +66,7 @@ def load_env_files():
 def parse_args() -> argparse.Namespace:
     """解析命令行参数"""
     parser = argparse.ArgumentParser(
-        prog="gitmsg",
+        prog="gcm",
         description="自动生成 Git Commit Message"
     )
 
