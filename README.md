@@ -264,6 +264,23 @@ gcm/
 | `make clean` | 清理缓存和构建文件 |
 | `make test` | 测试 gcm 命令是否可用 |
 | `make rebuild` | 重新安装（clean + install） |
+| `make build` | 打包为二进制文件并安装到 `~/bin` |
+| `make clean-bin` | 清理二进制文件 |
+
+### 二进制打包
+
+打包为独立二进制文件（无需 Python 环境即可运行）：
+
+```bash
+# 打包并安装到 ~/bin（默认）
+make build
+
+# 指定安装目录
+make build BIN_DIR=/usr/local/bin
+
+# 清理二进制文件
+make clean-bin
+```
 
 ### 手动安装/卸载
 
