@@ -20,15 +20,15 @@ class LLMConfig:
     def __post_init__(self):
         # 从环境变量获取配置
         if self.api_key is None:
-            self.api_key = os.environ.get("OPENAI_API_KEY")
+            self.api_key = os.environ.get("GCM_API_KEY")
 
-        # 支持 OPENAI_API_URL 环境变量（兼容智谱等第三方服务）
+        # 支持 GCM_API_URL 环境变量（兼容智谱等第三方服务）
         if self.api_base == "https://api.openai.com/v1":
-            self.api_base = os.environ.get("OPENAI_API_URL", self.api_base)
+            self.api_base = os.environ.get("GCM_API_URL", self.api_base)
 
-        # 支持 OPENAI_MODEL 环境变量
+        # 支持 GCM_MODEL 环境变量
         if self.model == "gpt-4o-mini":
-            self.model = os.environ.get("OPENAI_MODEL", self.model)
+            self.model = os.environ.get("GCM_MODEL", self.model)
 
 
 class LLMClient:
@@ -44,7 +44,7 @@ class LLMClient:
         if self._client is None:
             if not self.config.api_key:
                 raise ValueError(
-                    "API Key 未配置。请设置环境变量 OPENAI_API_KEY"
+                    "API Key 未配置。请设置环境变量 GCM_API_KEY"
                 )
 
             self._client = OpenAI(

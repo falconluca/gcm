@@ -98,7 +98,7 @@ cp .env.example .env
 编辑 `.env` 文件，填入你的 API Key：
 
 ```bash
-OPENAI_API_KEY="your-api-key-here"
+GCM_API_KEY="your-api-key-here"
 ```
 
 ### 5. 使用
@@ -119,13 +119,13 @@ gcm
 
 ```bash
 # 必需：API Key
-OPENAI_API_KEY="your-api-key"
+GCM_API_KEY="your-api-key"
 
 # 可选：API URL（用于第三方服务）
-OPENAI_API_URL="https://api.openai.com/v1"
+GCM_API_URL="https://api.openai.com/v1"
 
 # 可选：模型名称
-OPENAI_MODEL="gpt-4o-mini"
+GCM_MODEL="gpt-4o-mini"
 ```
 
 ### .env 文件查找顺序
@@ -167,9 +167,9 @@ gcm --version
 | 参数 | 简写 | 说明 |
 |------|------|------|
 | `--verbose` | `-v` | 生成详细的 commit message |
-| `--model MODEL` | `-m` | 使用的模型名称（覆盖 OPENAI_MODEL） |
-| `--api-base URL` | | API 基础 URL（覆盖 OPENAI_API_URL） |
-| `--api-key KEY` | | API Key（覆盖 OPENAI_API_KEY，不推荐在命令行中使用） |
+| `--model MODEL` | `-m` | 使用的模型名称（覆盖 GCM_MODEL） |
+| `--api-base URL` | | API 基础 URL（覆盖 GCM_API_URL） |
+| `--api-key KEY` | | API Key（覆盖 GCM_API_KEY，不推荐在命令行中使用） |
 | `--version` | | 显示版本号 |
 | `--help` | `-h` | 显示帮助信息 |
 
@@ -244,14 +244,14 @@ gcm/
 
 | 变量 | 说明 | 示例 |
 |------|------|------|
-| `OPENAI_API_KEY` | LLM 服务的 API Key | `sk-xxx` |
+| `GCM_API_KEY` | LLM 服务的 API Key | `sk-xxx` |
 
 ### 可选变量
 
 | 变量 | 说明 | 默认值 |
 |------|------|--------|
-| `OPENAI_API_URL` | API 基础 URL | `https://api.openai.com/v1` |
-| `OPENAI_MODEL` | 使用的模型名称 | `gpt-4o-mini` |
+| `GCM_API_URL` | API 基础 URL | `https://api.openai.com/v1` |
+| `GCM_MODEL` | 使用的模型名称 | `gpt-4o-mini` |
 
 ## 可用命令
 
@@ -297,7 +297,7 @@ rm -rf build/ dist/ *.egg-info __pycache__
 
 ## 支持的 LLM 服务
 
-| 服务 | OPENAI_API_URL | 推荐模型 |
+| 服务 | GCM_API_URL | 推荐模型 |
 |------|----------------|----------|
 | **OpenAI** | `https://api.openai.com/v1` | `gpt-4o`, `gpt-4o-mini` |
 | **智谱 AI** | `https://open.bigmodel.cn/api/paas/v4` | `glm-4-plus`, `glm-4-flash` |
@@ -311,18 +311,18 @@ rm -rf build/ dist/ *.egg-info __pycache__
 
 ```bash
 # .env
-OPENAI_API_KEY="your-zhipu-api-key"
-OPENAI_API_URL="https://open.bigmodel.cn/api/paas/v4"
-OPENAI_MODEL="glm-4-flash"
+GCM_API_KEY="your-zhipu-api-key"
+GCM_API_URL="https://open.bigmodel.cn/api/paas/v4"
+GCM_MODEL="glm-4-flash"
 ```
 
 **使用 DeepSeek：**
 
 ```bash
 # .env
-OPENAI_API_KEY="your-deepseek-api-key"
-OPENAI_API_URL="https://api.deepseek.com"
-OPENAI_MODEL="deepseek-chat"
+GCM_API_KEY="your-deepseek-api-key"
+GCM_API_URL="https://api.deepseek.com"
+GCM_MODEL="deepseek-chat"
 ```
 
 **使用本地 Ollama：**
@@ -332,9 +332,9 @@ OPENAI_MODEL="deepseek-chat"
 ollama serve
 
 # .env
-OPENAI_API_KEY="ollama"  # Ollama 不需要真实 key
-OPENAI_API_URL="http://localhost:11434/v1"
-OPENAI_MODEL="llama3"
+GCM_API_KEY="ollama"  # Ollama 不需要真实 key
+GCM_API_URL="http://localhost:11434/v1"
+GCM_MODEL="llama3"
 ```
 
 ## 输出示例
@@ -443,15 +443,15 @@ gcm
 
 #### `配置错误: API Key 未配置`
 
-**原因：** 未设置 `OPENAI_API_KEY` 环境变量
+**原因：** 未设置 `GCM_API_KEY` 环境变量
 
 **解决：**
 ```bash
 # 创建 .env 文件
-echo 'OPENAI_API_KEY="your-key"' > .env
+echo 'GCM_API_KEY="your-key"' > .env
 
 # 或设置环境变量
-export OPENAI_API_KEY="your-key"
+export GCM_API_KEY="your-key"
 ```
 
 #### `生成失败: API 调用失败`
@@ -469,7 +469,7 @@ cat .env
 
 # 测试 API 连接
 curl https://api.openai.com/v1/models \
-  -H "Authorization: Bearer $OPENAI_API_KEY"
+  -H "Authorization: Bearer $GCM_API_KEY"
 ```
 
 #### `ModuleNotFoundError: No module named 'gcm'`

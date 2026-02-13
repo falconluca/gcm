@@ -79,19 +79,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--api-base",
         type=str,
-        help="API 基础 URL（覆盖 OPENAI_API_URL）"
+        help="API 基础 URL（覆盖 GCM_API_URL）"
     )
 
     parser.add_argument(
         "--api-key",
         type=str,
-        help="API Key（覆盖 OPENAI_API_KEY，不推荐在命令行中使用）"
+        help="API Key（覆盖 GCM_API_KEY，不推荐在命令行中使用）"
     )
 
     parser.add_argument(
         "-m", "--model",
         type=str,
-        help="使用的模型名称（覆盖 OPENAI_MODEL）"
+        help="使用的模型名称（覆盖 GCM_MODEL）"
     )
 
     parser.add_argument(
