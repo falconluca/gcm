@@ -8,37 +8,38 @@
 - 支持 OpenAI 协议的各类大模型
 - 支持精简/详细两种 commit message 风格
 - 遵循 Conventional Commits 规范
-- 支持自定义配置
+- 通过 `.env` 文件配置
 
 ## 安装
 
 ```bash
 # 从源码安装
 pip install -e .
-
-# 或直接安装依赖后使用
-pip install -r requirements.txt
 ```
 
 ## 配置
 
-### 1. 设置 API Key
+在项目目录创建 `.env` 文件：
 
 ```bash
-# 设置环境变量（推荐）
-export OPENAI_API_KEY="your-api-key"
+# 必需：API Key
+OPENAI_API_KEY="your-api-key"
+
+# 可选：API URL（用于智谱 AI 等第三方服务）
+OPENAI_API_URL="https://api.openai.com/v1"
+
+# 可选：模型名称
+OPENAI_MODEL="gpt-4o-mini"
 ```
 
-### 2. 配置文件（可选）
+### 支持的服务
 
-在项目目录或用户主目录创建 `.gitmsg.yaml`：
-
-```yaml
-api_base: https://api.openai.com/v1
-model: gpt-4o-mini
-temperature: 0.7
-max_tokens: 1000
-```
+| 服务 | OPENAI_API_URL | OPENAI_MODEL |
+|------|----------------|--------------|
+| OpenAI | https://api.openai.com/v1 | gpt-4o, gpt-4o-mini |
+| 智谱 AI | https://open.bigmodel.cn/api/paas/v4 | glm-4-plus, glm-4-flash |
+| DeepSeek | https://api.deepseek.com/v1 | deepseek-chat |
+| Ollama | http://localhost:11434/v1 | llama3, qwen2 |
 
 ## 使用
 
@@ -49,11 +50,8 @@ gitmsg
 # 生成详细 commit message
 gitmsg -v
 
-# 指定模型
+# 指定模型（覆盖 .env）
 gitmsg -m gpt-4
-
-# 使用自定义配置文件
-gitmsg -c /path/to/config.yaml
 
 # 查看帮助
 gitmsg --help
@@ -69,17 +67,6 @@ git commit -m "$(gitmsg)"
 git config --global alias.cm '!git commit -m "$(gitmsg)"'
 # 之后可以用 git cm
 ```
-
-## 支持的模型
-
-任何兼容 OpenAI API 的模型，包括：
-
-- OpenAI: gpt-4o, gpt-4o-mini, gpt-4, gpt-3.5-turbo
-- Azure OpenAI
-- 本地部署模型（Ollama, vLLM 等）
-- 第三方 API 服务
-
-只需修改 `api_base` 和 `model` 配置即可。
 
 ## 输出示例
 
@@ -97,19 +84,8 @@ feat(auth): 添加用户登录功能
 - 实现 JWT token 认证
 - 添加登录表单验证
 - 集成第三方 OAuth 登录
-- 添加登录状态持久化
 
 Closes #123
-```
-
-## 开发
-
-```bash
-# 安装开发依赖
-pip install -e .
-
-# 运行测试
-python -m pytest
 ```
 
 ## License
