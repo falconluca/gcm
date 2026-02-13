@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Optional
 
 import yaml
+from dotenv import load_dotenv
 
 from auto_gitmsg import __version__
 from auto_gitmsg.git_utils import (
@@ -136,8 +137,56 @@ def generate_commit_message(
     return client.chat(system_prompt, user_prompt)
 
 
+def find_env_file() -> Optional[Path]:
+    """查找 .env 文件
+
+    查找顺序:
+    1. 当前目录的 .env
+    2. 父目录（向上查找直到 git 根目录）
+    3. 用户主目录的 .env
+    """
+    # 当前目录
+    env_path = Path.cwd() / ".env"
+    if env_path.exists():
+        return env_path
+
+    # 向上查找直到 git 根目录
+    current = Path.cwd()
+    while current != current.parent:
+        current = current.parent
+        env_path = current / ".env"
+        if env_path.exists():
+            return env_path
+        # 如果找到 .git 目录就停止
+        if (current / ".git").exists():
+            break
+
+    # 用户主目录
+    env_path = Path.home() / ".env"
+    if env_path.exists():
+        return env_path
+
+    return None
+
+
+def load_env_files():
+    """加载 .env 文件"""
+    # 加载用户主目录的 .env（优先级较低）
+    home_env = Path.home() / ".env"
+    if home_env.exists():
+        load_dotenv(home_env)
+
+    # 加载项目目录的 .env（优先级较高）
+    project_env = find_env_file()
+    if project_env:
+        load_dotenv(project_env)
+
+
 def main():
     """主入口函数"""
+    # 加载 .env 文件
+    load_env_files()
+
     args = parse_args()
 
     # 检查是否在 git 仓库中
