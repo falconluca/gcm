@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/git-gcm.svg)](https://pypi.org/project/git-gcm/)
 
-基于 AI 的 Git Commit Message 自动生成工具，支持所有 OpenAI 协议兼容的大模型服务。
+基于大模型的 Git Commit Message 自动生成工具，支持所有 OpenAI 协议兼容的大模型服务
 
 ## 安装
 
@@ -44,12 +44,6 @@ feat(auth): 添加用户登录功能
 - 实现 JWT token 认证
 - 添加登录表单验证
 - 集成第三方 OAuth 登录
-```
-
-## Git 集成
-
-```bash
-git commit -m "$(gcm)"
 ```
 
 MIT License
