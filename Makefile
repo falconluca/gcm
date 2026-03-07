@@ -1,6 +1,7 @@
-.PHONY: install uninstall clean test help build clean-bin
+.PHONY: install uninstall clean test help build clean-bin venv activate
 
 BIN_DIR ?= ~/bin
+VENV_DIR ?= .venv
 
 help:
 	@echo "GCM - Git Commit Message Generator"
@@ -12,6 +13,18 @@ help:
 	@echo "  make rebuild    重新安装"
 	@echo "  make build      打包二进制到 $(BIN_DIR)"
 	@echo "  make clean-bin  清理二进制文件"
+	@echo "  make venv       创建虚拟环境"
+	@echo "  make activate   进入虚拟环境"
+
+venv:
+	@echo "创建虚拟环境..."
+	python3 -m venv $(VENV_DIR)
+	@echo "虚拟环境已创建: $(VENV_DIR)"
+	@echo "运行 'source $(VENV_DIR)/bin/activate' 激活"
+
+activate:
+	@echo "进入虚拟环境..."
+	@source $(VENV_DIR)/bin/activate && echo "已进入虚拟环境，输入 'exit' 退出" && $(SHELL)
 
 install:
 	pip install -e .
